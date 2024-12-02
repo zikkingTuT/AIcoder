@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.powerms.mapper.PaymentReminderMapper">
+
+    <resultMap id="BaseResultMap" type="com.china.powerms.entity.PaymentReminder">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="month" column="month" jdbcType="VARCHAR"/>
+            <result property="monthlyUsage" column="monthly_usage" jdbcType="DECIMAL"/>
+            <result property="amountDue" column="amount_due" jdbcType="DECIMAL"/>
+            <result property="paymentStatus" column="payment_status" jdbcType="VARCHAR"/>
+            <result property="reminderDate" column="reminder_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,month,
+        monthly_usage,amount_due,payment_status,
+        reminder_date
+    </sql>
+</mapper>

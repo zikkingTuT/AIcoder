@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.powerms.mapper.ElectricityBillingMapper">
+
+    <resultMap id="BaseResultMap" type="com.china.powerms.entity.ElectricityBilling">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="month" column="month" jdbcType="VARCHAR"/>
+            <result property="communityName" column="community_name" jdbcType="VARCHAR"/>
+            <result property="houseNumber" column="house_number" jdbcType="VARCHAR"/>
+            <result property="ownerName" column="owner_name" jdbcType="VARCHAR"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="monthlyUsage" column="monthly_usage" jdbcType="DECIMAL"/>
+            <result property="amountDue" column="amount_due" jdbcType="DECIMAL"/>
+            <result property="paymentStatus" column="payment_status" jdbcType="VARCHAR"/>
+            <result property="paymentNumber" column="payment_number" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,month,community_name,
+        house_number,owner_name,user_id,
+        monthly_usage,amount_due,payment_status,
+        payment_number
+    </sql>
+</mapper>
