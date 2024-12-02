@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Slf4j
 @RestController
@@ -40,6 +41,7 @@ public class UserController {
 
     @PostMapping("/register")
     public R<Users> createUser(@RequestBody @Valid Users users) {
+        log.info("users:{}",users);
         // 检查用户名是否存在
         Users existUser = usersService.lambdaQuery()
                 .eq(Users::getUsername, users.getUsername())
