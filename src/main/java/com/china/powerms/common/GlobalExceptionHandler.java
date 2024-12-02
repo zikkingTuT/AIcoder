@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
      * 处理参数验证异常
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public R<Void> handleValidationException(MethodArgumentNotValidException ex) {
+    public Result<Void> handleValidationException(MethodArgumentNotValidException ex) {
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
@@ -23,14 +23,14 @@ public class GlobalExceptionHandler {
                         error.getDefaultMessage()))
                 .collect(Collectors.toList());
 
-        return R.failed(String.join(", ", errors));
+        return Result.failed(String.join(", ", errors));
     }
 
     /**
      * 处理单个参数验证异常
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    public R<Void> handleValidationException(ConstraintViolationException ex) {
+    public Result<Void> handleValidationException(ConstraintViolationException ex) {
         List<String> errors = ex.getConstraintViolations()
                 .stream()
                 .map(violation -> String.format("%s: %s",
@@ -38,6 +38,6 @@ public class GlobalExceptionHandler {
                         violation.getMessage()))
                 .collect(Collectors.toList());
 
-        return R.failed(String.join(", ", errors));
+        return Result.failed(String.join(", ", errors));
     }
 }

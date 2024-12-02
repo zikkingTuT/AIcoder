@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.china.powerms.common.R;
+import com.china.powerms.common.Result;
 import com.china.powerms.dto.ElectricityBillingQueryDTO;
 import com.china.powerms.dto.ElectricityBillingUpdateDTO;
 import com.china.powerms.entity.ElectricityBilling;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @RestController
 @RequestMapping("/electricity-billing")
@@ -30,7 +29,7 @@ public class ElectricityBillingController {
      * 动态条件查询
      */
     @PostMapping("/list")
-    public R<IPage<ElectricityBilling>> list(@RequestBody ElectricityBillingQueryDTO queryDTO) {
+    public Result<IPage<ElectricityBilling>> list(@RequestBody ElectricityBillingQueryDTO queryDTO) {
         // 创建分页对象
         Page<ElectricityBilling> page = new Page<>(queryDTO.getPage(), queryDTO.getPageSize());
 
@@ -47,14 +46,14 @@ public class ElectricityBillingController {
 
         // 执行分页查询
         IPage<ElectricityBilling> pageResult = electricityBillingService.page(page, queryWrapper);
-        return R.ok(pageResult);
+        return Result.ok(pageResult);
     }
 
     /**
      * 根据业主姓名修改支付状态
      */
     @PostMapping("/update-status")
-    public R<?> updatePaymentStatus(@RequestBody ElectricityBillingUpdateDTO updateDTO) {
+    public Result<?> updatePaymentStatus(@RequestBody ElectricityBillingUpdateDTO updateDTO) {
         LambdaUpdateWrapper<ElectricityBilling> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(ElectricityBilling::getOwnerName, updateDTO.getOwnerName())
                 .set(ElectricityBilling::getPaymentStatus, updateDTO.getPaymentStatus());
@@ -63,7 +62,7 @@ public class ElectricityBillingController {
         PaymentReminderupdateWrapper.eq(PaymentReminder::getUserId, updateDTO.getOwnerName())
                 .set(PaymentReminder::getPaymentStatus, updateDTO.getPaymentStatus());
         electricityBillingService.update(updateWrapper);
-        return success ? R.ok() : R.failed("更新失败");
+        return success ? Result.ok() : Result.failed("更新失败");
     }
 
 
